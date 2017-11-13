@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block content %}
+<form class="form-horizontal" method="post" onsubmit="return checkForm(this)">
+ <div class="form-group" id = 'name_field'>
+  <label for="name" class="col-sm-2 control-label">Название фильма</label>
+  <div class="col-sm-10">
+   <input type="text" class="form-control" name="name" id = "name" placeholder="Название фильма">
+  </div>
+ </div>
+ <div class="form-group" id = 'year_field'>
+  <label for="year" class="col-sm-2 control-label">Год</label>
+  <div class="col-sm-10">
+   <input type="text" class="form-control" name="year" id = "year" placeholder="Год">
+  </div>
+ </div>
+ <div class="form-group" id = 'director_field'>
+  <label for="director" class="col-sm-2 control-label">Режиссер</label>
+  <div class="col-sm-10">
+   <input type="text" class="form-control" name="director" id = "director" placeholder="Режиссер">
+  </div>
+ </div>
+ <div class="form-group" id = 'country_field'>
+  <label for="country" class="col-sm-2 control-label">Страна производитель</label>
+  <div class="col-sm-10">
+   <input type="text" class="form-control" name="country" id = "country" placeholder="Страна производитель">
+  </div>
+ </div>
+ <div class="form-group" id = 'length_field'>
+  <label for="length" class="col-sm-2 control-label">Продолжительность</label>
+  <div class="col-sm-10">
+   <input type="text" class="form-control" name="length" id = "length" placeholder="Продолжительность">
+  </div>
+ </div>
+ <div class="form-group">
+  <label for="length" class="col-sm-2 control-label">Жанр</label>
+  <div class="col-sm-10">
+   <select class="form-control" name="genre">
+		<option value="0">Не выбрано</option>
+		{% for genre in genres %}
+			<option value="{{ genre.id }}">{{ genre.caption }}</option>
+		{% endfor %}
+</select>
+  </div>
+ </div>
+ <div class="form-group">
+  <div class="col-sm-offset-2 col-sm-10">
+   <button type="submit" class="btn btn-success">Подтвердить</button>
+  </div>
+ </div>
+</form>	
+<script type="text/javascript">
+function checkForm(form){
+ var flag = true;
+    if (!!!document.getElementById('name').value){	
+		document.getElementById('name_field').className = "form-group has-error";
+		flag = false;
+    }
+	else{
+		document.getElementById('name_field').className = "form-group";
+		flag = true;
+	}
+	if (!!!document.getElementById('year').value){	
+		document.getElementById('year_field').className = "form-group has-error";
+		flag = false;
+    }
+	else{
+		document.getElementById('year_field').className = "form-group";
+		flag = true;
+	}
+	if (!!!document.getElementById('director').value){	
+		document.getElementById('director_field').className = "form-group has-error";
+		flag = false;
+    }
+	else{
+		document.getElementById('director_field').className = "form-group";
+		flag = true;
+	}
+	if (!!!document.getElementById('country').value){	
+		document.getElementById('country_field').className = "form-group has-error";
+		flag = false;
+    }
+	else{
+		document.getElementById('country_field').className = "form-group";
+		flag = true;
+	}
+	if (!!!document.getElementById('length').value){	
+		document.getElementById('length_field').className = "form-group has-error";
+		flag = false;
+    }
+	else{
+		document.getElementById('length_field').className = "form-group";
+		flag = true;
+	}
+	return flag;
+};
+
+</script>
+ {% endblock %}

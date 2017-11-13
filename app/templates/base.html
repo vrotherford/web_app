@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href={{ url_for('static', filename='bootstrap.css') }} rel="stylesheet">
+	<script src={{ url_for('static', filename='bootstrap.js') }}></script>
+</head>
+<body>
+	<div class="container">
+	<div class="row-fluid">
+		<div class="span12">
+		<div  style ="
+		width: 100%;
+		min-height:200px;
+		margin: 7px;
+		background: #337ab7;">{% if g.user.is_authenticated %}
+	 Привет {{g.user.login}}
+	{% endif %}</div>
+		</div>
+	</div>
+	</div>
+	<div class="container">
+	<ul class="nav nav-pills">
+	  <li {% if request.endpoint == "index" %}class="active"{% endif %}>
+		<a href="index">Главная</a>
+	  </li>
+	  {% if g.user.groups_fk == 1%}<li {% if request.endpoint == "add" %}class="active"{% endif %}><a href="add">Добавить</a></li>{% endif %}
+	  {% if not g.user.is_authenticated %}
+	  <li {% if request.endpoint == "login" %}class="active"{% endif %}><a href="login">Вход</a></li>
+	  {% endif %}
+	  {% if g.user.is_authenticated %}
+	  <li><a href="{{ url_for('logout') }}">Logout</a></li>
+	  {% endif %}
+	</ul>
+	
+	<div>
+	<div class="container content">
+    {% block content %}{% endblock %}
+  </div>
+</body>
